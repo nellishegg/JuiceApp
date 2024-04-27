@@ -15,27 +15,30 @@ class ScenarioTest {
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     fun caseNumberOne() {
-        val appPage = AppPage()
+        val appPage = AppPage(
 
-        appPage.checkStateIsInitial()
+        )
+
+        appPage.checkInitialState() //1
 
         appPage.clickNextButton()
-        repeat(5) {
 
-            appPage.checkSqueezeState()
+        repeat(5) { num ->
             appPage.clickImage()
+            appPage.checkSqueezeState(num)//2
         }
 
-        appPage.checkStateIsProcess()//2/1 continue
+        appPage.checkProcessState()//2.1
+
         appPage.clickNextButton()
 
-        appPage.checkStateIsMadeState()
+        appPage.checkMadeState() //3
         appPage.clickNextButton()
 
-        appPage.checkFinishState()
+        appPage.checkFinishState()//4
 
         appPage.clickRestartButton()
-        appPage.checkStateIsInitial()
+        appPage.checkInitialState()//1
 
 
     }
