@@ -15,7 +15,6 @@ import org.hamcrest.Matchers
 class TitleUi(
     private val parent: Matcher<View>,
     private val rootId: Int,
-//    private val clickTimes: String,
 ) {
 
     //1-изменяемость текста при каждом новом состоянии(4)
@@ -23,47 +22,49 @@ class TitleUi(
 
     private val text: Int = R.id.titleTextViewId
 
-    // TODO: download pics
-//    private val firstStateTitle =
-//    private val secondStateTitle =
-//    private val thirdStateTitle =
-//    private val fourthStateTitle =
+
+    private val initialStateTitle = "Tap the button to select a lemon"
+    private val squeezeStateTitle = "Keep tapping the lemon  to squeeze it"
+    private val madeStateTitle = "Tap the button to drink the lemonade"
+    private val finishStateTitle = "Tap the button to start again"
 
 
     private val interaction = onView(
         Matchers.allOf(
             withId(text),
-            withText("Please tap to select a lemon"),
             isAssignableFrom(TextView::class.java),
             parent,
             withParent(withId(rootId)),
         )
-    ).check(matches(isDisplayed()))
+    )
 
     fun checkInitialState() {
-       interaction
+        interaction.check(matches(isDisplayed()))
+            .check(matches(withText(initialStateTitle)))
     }
 
-    fun checkSqueezeState(text: Int) {
-        TODO("Not yet implemented")
+    fun checkSqueezeState() {
+        // TODO: check num state
+        interaction.check(matches(withText(squeezeStateTitle)))
+
     }
 
     fun checkProcessState() {
-        TODO("Not yet implemented")
+        // TODO: check num state
+        interaction.check(matches(withText(squeezeStateTitle)))
     }
 
     fun checkMadeState() {
-        TODO("Not yet implemented")
+        interaction.check(matches(withText(madeStateTitle)))
+
     }
 
     fun checkFinishState() {
-        TODO("Not yet implemented")
+        interaction.check(matches(withText(finishStateTitle)))
 
 
-    }
-
-    fun decrementClickTimes() {
 
     }
+
 
 }

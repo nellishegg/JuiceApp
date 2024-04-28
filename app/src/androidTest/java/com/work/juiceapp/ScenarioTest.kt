@@ -7,25 +7,26 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Rule
+import org.junit.Test
 
 
 @RunWith(AndroidJUnit4::class)
 class ScenarioTest {
+
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Test
     fun caseNumberOne() {
-        val appPage = AppPage(
-
-        )
+        val appPage = AppPage()
 
         appPage.checkInitialState() //1
 
         appPage.clickNextButton()
 
-        repeat(5) { num ->
+        repeat(5) {
             appPage.clickImage()
-            appPage.checkSqueezeState(num)//2
+            appPage.checkSqueezeState()//2
         }
 
         appPage.checkProcessState()//2.1
