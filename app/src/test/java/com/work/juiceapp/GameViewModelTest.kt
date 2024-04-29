@@ -13,7 +13,7 @@ class GameViewModelTest {
     @Before
     fun setUp() {
         repository = FakeRepository()
-        viewModel = MainViewModel(
+        viewModel = GameViewModel(
             repository = repository
         )
     }
@@ -22,83 +22,80 @@ class GameViewModelTest {
     fun caseNumberOne() {
 
         var actual = viewModel.init()
-        var expected = UiState.InitialState(
-            title = TitleUi.InitialState(value = "text1"),
-            image = ImageUi.InitialState,
-            button = ButtonUi.InitialState(value = "button text 1"),
+        var expected = UiState.Initial(
+            title = TitleUiState.Initial,
+            image = ImageUiState.Initial,
+            button = ButtonUiState.Initial,
         )
         assertEquals(expected, actual)
 
 
-        actual = viewModel.handleButton()//обработка нажатия кнопки next
-        expected = UiState.SqueezeState(
-            title = TitleUi.SqueezeState(value = "text2"),
-            image = ImageUi.SqueezeState(),
-            button = ButtonUi.SqueezeState(value = "button text 1"),
+        actual = viewModel.goToSqueeze()//обработка нажатия кнопки next
+        expected = UiState.Squeeze(
+            title = TitleUiState.Squeeze,
+            image = ImageUiState.Squeeze,
+            button = ButtonUiState.Squeeze,
 
             )
         assertEquals(expected, actual)
 
 
         repeat(5) {
-            actual = viewModel.handleImage()
-            expected = UiState.SqueezeState(
-                title = TitleUi.SqueezeState(value = "text2"),
-                image = ImageUi.SqueezeState(),
-                button = ButtonUi.SqueezeState(value = "button text 1")
-            )
             assertEquals(expected, actual)
+            actual = viewModel.handleImage()
+
         }
 
-        actual = viewModel.handleButton()
-        expected = UiState.ProcessState(
-            title = TitleUi.ProcessState(value = "text2"),
-            image = ImageUi.ProcessState(),
-            button = ButtonUi.ProcessState(value = "button text 1"),
+        expected = UiState.Process(
+            title = TitleUiState.Process,
+            image = ImageUiState.Process,
+            button = ButtonUiState.Process,
         )
         assertEquals(expected, actual)
 
 
-        actual = viewModel.handleButton()
-        expected = UiState.MadeState(
-            title = TitleUi.MadeState(value = "text3"),
-            image = ImageUi.MadeState(),
-            button = ButtonUi.MadeState(value = "button text 1"),
+        actual = viewModel.goToMade()
+        expected = UiState.Made(
+            title = TitleUiState.Made,
+            image = ImageUiState.Made,
+            button = ButtonUiState.Made,
         )
         assertEquals(expected, actual)
 
 
-        actual = viewModel.handleButton()
-        expected = UiState.FinishState(
-            title = TitleUi.FinishState(value = "text4"),
-            image = ImageUi.FinishState(),
-            button = ButtonUi.FinishState(value = "button text 2"),
+        actual = viewModel.goToFinish()
+        expected = UiState.Finish(
+            title = TitleUiState.Finish,
+            image = ImageUiState.Finish,
+            button = ButtonUiState.Finish,
         )
         assertEquals(expected, actual)
 
 
-        actual = viewModel.handleButton()
-        expected = UiState.InitialState(
-            title = TitleUi.InitialState(value = "text1"),
-            image = ImageUi.InitialState(),
-            button = ButtonUi.InitialState(value = "button text 1"),
+        actual = viewModel.startAgain()
+        expected = UiState.Initial(
+            title = TitleUiState.Initial,
+            image = ImageUiState.Initial,
+            button = ButtonUiState.Initial,
         )
         assertEquals(expected, actual)
 
     }
 }
 
-private class FakeRepository(number: Int) : Repository {
+private class FakeRepository() : Repository {
 
-    private var currentTimesNumber = 5
-    private var currentIndex = 0
+    private var currentTimesClicked = 0
 
-    fun decrement() {
-        while (currentIndex > 5) {
-            currentTimesNumber--
-            currentIndex++
-        }
+    override fun increment() {
+        currentTimesClicked++
     }
 
+    override fun isMax(): Boolean {
+        return currentTimesClicked == 5
+    }
 
+    override fun reset() {
+        currentTimesClicked = 0
+    }
 }

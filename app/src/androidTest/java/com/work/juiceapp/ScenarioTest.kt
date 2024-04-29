@@ -25,8 +25,8 @@ class ScenarioTest {
         appPage.clickNextButton()
 
         repeat(5) {
-            appPage.clickImage()
             appPage.checkSqueezeState()//2
+            appPage.clickImage()
         }
 
         appPage.checkProcessState()//2.1
