@@ -1,14 +1,15 @@
 package com.work.juiceapp
 
 import com.work.juiceapp.databinding.ActivityMainBinding
+import java.io.Serializable
 import java.lang.IllegalStateException
 
-interface UiState {
-
+interface UiState:Serializable {
 
     fun update(binding: ActivityMainBinding)
     fun handleAction(gameViewModel: Actions): UiState
 
+    // Abstract class - общий код для всех классов, которые реализуют интерфейс
     abstract class Abstract(
         private val title: TitleUiState,
         private val image: ImageUiState,
@@ -20,7 +21,6 @@ interface UiState {
             button.update(mainButton)
         }
     }
-
     data class Initial(
         private val title: TitleUiState,
         private val image: ImageUiState,
@@ -31,8 +31,6 @@ interface UiState {
             return gameViewModel.goToSqueeze()
         }
     }
-
-
     data class Squeeze(
         private val title: TitleUiState,
         private val image: ImageUiState,
@@ -43,8 +41,6 @@ interface UiState {
             throw IllegalStateException()
         }
     }
-
-
     data class Process(
         private val title: TitleUiState,
         private val image: ImageUiState,
@@ -56,8 +52,6 @@ interface UiState {
         }
 
     }
-
-
     data class Made(
         private val title: TitleUiState,
         private val image: ImageUiState,

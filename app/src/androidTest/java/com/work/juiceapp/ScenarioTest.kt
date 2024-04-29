@@ -27,20 +27,26 @@ class ScenarioTest {
         repeat(5) {
             appPage.checkSqueezeState()//2
             appPage.clickImage()
+            activityScenarioRule.scenario.recreate()
         }
 
+        appPage.checkProcessState()//2.1
+        activityScenarioRule.scenario.recreate()
         appPage.checkProcessState()//2.1
 
         appPage.clickNextButton()
 
         appPage.checkMadeState() //3
+        activityScenarioRule.scenario.recreate()
+        appPage.checkMadeState() //3
         appPage.clickNextButton()
 
+        appPage.checkFinishState()//4
+        activityScenarioRule.scenario.recreate()
         appPage.checkFinishState()//4
 
         appPage.clickRestartButton()
         appPage.checkInitialState()//1
-
 
     }
 }
