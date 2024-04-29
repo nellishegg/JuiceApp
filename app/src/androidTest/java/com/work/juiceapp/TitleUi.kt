@@ -20,7 +20,7 @@ class TitleUi(
     //1-изменяемость текста при каждом новом состоянии(4)
     // 2- изменяемость цифры в тексте в состоянии 2 и 2.1
 
-    private val text: Int = R.id.titleTextViewId
+    private val text: Int = R.id.titleTextView
 
 
     private val initialStateTitle = "Tap the button to select a lemon"

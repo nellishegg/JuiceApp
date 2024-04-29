@@ -17,7 +17,7 @@ class ImageUi(
     parent: Matcher<View>,
     rootId: Int,
 ) {
-    private val image:Int = R.id.imageViewId
+    private val image:Int = R.id.imageButton
 
     private val treeImage = R.drawable.tree
     private val lemonImage = R.drawable.lemon
