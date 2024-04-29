@@ -1,6 +1,5 @@
 package com.work.juiceapp
 
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.VectorDrawable
 import android.view.View
 import android.widget.ImageView
@@ -10,7 +9,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.test.espresso.matcher.BoundedMatcher
 import org.hamcrest.Description
 
-class CheckImageMatcher(@DrawableRes private val drawableResId: Int) :
+class DrawableMatcher(@DrawableRes private val drawableResId: Int) :
     BoundedMatcher<View , ImageView>(ImageView::class.java) {
 
     override fun describeTo(description: Description) {

@@ -7,8 +7,9 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.espresso.matcher.ViewMatchers.isClickable
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import org.hamcrest.Matcher
@@ -26,7 +27,6 @@ class ButtonUi(
     private val interaction = Espresso.onView(
         Matchers.allOf(
             withId(button),
-            withText("Next"),
             isAssignableFrom(Button::class.java),
             parent,
             ViewMatchers.withParent(withId(rootId)),
@@ -38,28 +38,33 @@ class ButtonUi(
     }
 
     fun checkInitialState() {
-        interaction.check(matches(isDisplayed()))
-            .check(matches(isClickable()))
-            .check(matches(withText("Next")))
+        interaction.check(matches(isEnabled()))
+            .check(matches(withText(R.string.next)))
     }
 
 
     fun checkSqueezeState() {
-        interaction.check(matches(not(isClickable())))
+        interaction.check(matches(not(isEnabled())))
+            .check(matches(withText(R.string.next)))
+        
     }
 
     fun checkProcessState() {
-        interaction.check(matches(isClickable()))
+        interaction.check(matches(isEnabled()))
+            .check(matches(withText(R.string.next)))
+        
     }
 
     fun checkMadeState() {
-        interaction.check(matches(isClickable()))
+        interaction.check(matches(isEnabled()))
+            .check(matches(withText(R.string.next)))
+
 
     }
 
     fun checkFinishState() {
-        interaction.check(matches(isClickable()))
-            .check(matches(withText("Restart")))
+        interaction.check(matches(isEnabled()))
+            .check(matches(withText(R.string.restart)))
 
     }
 

@@ -1,8 +1,7 @@
 package com.work.juiceapp
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.ImageButton
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -28,7 +27,7 @@ class ImageUi(
     private val interaction = Espresso.onView(
         Matchers.allOf(
             withId(image),
-            ViewMatchers.isAssignableFrom(ImageView::class.java),
+            ViewMatchers.isAssignableFrom(ImageButton::class.java),//imageButton
             parent,
             ViewMatchers.withParent(withId(rootId)),
         )
@@ -37,29 +36,29 @@ class ImageUi(
     fun checkInitialState() {
         interaction.check(matches(isDisplayed()))
             .check(matches(not(isClickable())))
-            .check(matches(CheckImageMatcher(treeImage)))
+            .check(matches(DrawableMatcher(treeImage)))
     }
 
 
     fun checkSqueezeState() {
         interaction.check(matches(isClickable()))
-            .check(matches(CheckImageMatcher(lemonImage)))
+            .check(matches(DrawableMatcher(lemonImage)))
 
     }
 
     fun checkProcessState() {
         interaction.check(matches(not(isClickable())))
-            .check(matches(CheckImageMatcher(lemonImage)))
+            .check(matches(DrawableMatcher(lemonImage)))
     }
 
     fun checkMadeState() {
         interaction.check(matches(not(isClickable())))
-            .check(matches(CheckImageMatcher(lemonadeImage)))
+            .check(matches(DrawableMatcher(lemonadeImage)))
     }
 
     fun checkFinishState() {
         interaction.check(matches(not(isClickable())))
-            .check(matches(CheckImageMatcher(glassImage)))
+            .check(matches(DrawableMatcher(glassImage)))
     }
 
     fun click() {

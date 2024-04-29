@@ -24,7 +24,7 @@ class TitleUi(
 
 
     private val initialStateTitle = "Tap the button to select a lemon"
-    private val squeezeStateTitle = "Keep tapping the lemon  to squeeze it"
+    private val squeezeStateTitle = "Keep tapping the lemon to squeeze it"
     private val madeStateTitle = "Tap the button to drink the lemonade"
     private val finishStateTitle = "Tap the button to start again"
 
@@ -46,7 +46,6 @@ class TitleUi(
     fun checkSqueezeState() {
         // TODO: check num state
         interaction.check(matches(withText(squeezeStateTitle)))
-
     }
 
     fun checkProcessState() {
@@ -56,13 +55,10 @@ class TitleUi(
 
     fun checkMadeState() {
         interaction.check(matches(withText(madeStateTitle)))
-
     }
 
     fun checkFinishState() {
         interaction.check(matches(withText(finishStateTitle)))
-
-
 
     }
 
