@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">JuiceApp</string>
+    <string name="tree">Tap the button to select a lemon</string>
+    <string name="squeeze">Keep tapping the lemon to squeeze it</string>
+    <string name="made">Tap the button to drink the lemonade</string>
+    <string name="finish">Tap the button to start again</string>
+    <string name="next">Next</string>
+    <string name="restart">Restart</string>
 </resources>

@@ -21,8 +21,8 @@ class GameViewModelTest {
     @Test
     fun caseNumberOne() {
 
-        var actual = viewModel.init()
-        var expected = UiState.Initial(
+        var actual: UiState = viewModel.init()
+        var expected: UiState = UiState.Initial(
             title = TitleUiState.Initial,
             image = ImageUiState.Initial,
             button = ButtonUiState.Initial,
