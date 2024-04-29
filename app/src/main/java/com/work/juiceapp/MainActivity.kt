@@ -11,23 +11,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val gameViewModel = GameViewModel()
+        lateinit var uiState: UiState
+
+        val gameViewModel = GameViewModel(Repository.Base())
 
         binding.mainButton.setOnClickListener {
-            val uiState: UiState = gameViewModel.handleButton()
+            uiState = uiState.handleAction(gameViewModel)
             uiState.update(binding)
         }
 
-        binding.imageViewId.setOnClickListener {
-            val uiState: UiState = gameViewModel.handleImage()
+        binding.imageButton.setOnClickListener {
+            uiState = gameViewModel.handleImage()
             uiState.update(binding)
         }
-        val uiState: UiState = gameViewModel.init()
+        uiState = gameViewModel.init()
         uiState.update(binding)
 
 
