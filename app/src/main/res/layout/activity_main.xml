@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageButton
+    <com.work.juiceapp.CustomImageButton
         android:id="@+id/imageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:freezesText="true"
         tools:text="Tap the button to select a lemon" />
 
-    <Button
+    <com.work.juiceapp.ActionButton
         android:id="@+id/mainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

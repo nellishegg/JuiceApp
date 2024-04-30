@@ -4,10 +4,9 @@ import com.work.juiceapp.databinding.ActivityMainBinding
 import java.io.Serializable
 import java.lang.IllegalStateException
 
-interface UiState:Serializable {
+interface UiState : Serializable {
 
     fun update(binding: ActivityMainBinding)
-    fun handleAction(gameViewModel: Actions): UiState
 
     // Abstract class - общий код для всех классов, которые реализуют интерфейс
     abstract class Abstract(
@@ -17,62 +16,39 @@ interface UiState:Serializable {
     ) : UiState {
         override fun update(binding: ActivityMainBinding) = with(binding) {
             title.update(titleTextView)
-            image.update(imageButton)
-            button.update(mainButton)
+            imageButton.updateUiState(image)
+            mainButton.updateUiState(button)
         }
     }
+
     data class Initial(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
-    ) : Abstract(title, image, button) {
+    ) : Abstract(title, image, button)
 
-        override fun handleAction(gameViewModel: Actions): UiState {
-            return gameViewModel.goToSqueeze()
-        }
-    }
     data class Squeeze(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
-    ) : Abstract(title, image, button) {
+    ) : Abstract(title, image, button)
 
-        override fun handleAction(gameViewModel: Actions): UiState {
-            throw IllegalStateException()
-        }
-    }
     data class Process(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
-    ) : Abstract(title, image, button) {
+    ) : Abstract(title, image, button)
 
-        override fun handleAction(gameViewModel: Actions): UiState {
-            return gameViewModel.goToMade()
-        }
-
-    }
     data class Made(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
-    ) : Abstract(title, image, button) {
-
-        override fun handleAction(gameViewModel: Actions): UiState {
-            return gameViewModel.goToFinish()
-        }
-
-    }
+    ) : Abstract(title, image, button)
 
     data class Finish(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
-    ) : Abstract(title, image, button) {
-
-        override fun handleAction(gameViewModel: Actions): UiState {
-            return gameViewModel.startAgain()
-        }
-    }
+    ) : Abstract(title, image, button)
 }
 

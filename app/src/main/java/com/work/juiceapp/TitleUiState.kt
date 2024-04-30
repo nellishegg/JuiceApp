@@ -6,30 +6,20 @@ import androidx.annotation.StringRes
 interface TitleUiState {
     fun update(titleTextView: TextView)
 
-    abstract class Abstract(@StringRes private val resId: Int):TitleUiState {
+    abstract class Abstract(@StringRes private val resId: Int) : TitleUiState {
         override fun update(titleTextView: TextView) {
             titleTextView.setText(resId)
         }
     }
 
-    object Initial : Abstract(R.string.tree) {
+    object Initial : Abstract(R.string.tree)
 
-    }
+    object Squeeze : Abstract(R.string.squeeze)
 
-    object Squeeze : Abstract(R.string.squeeze) {
+    object Process : Abstract(R.string.squeeze)
 
-    }
+    object Made : Abstract(R.string.made)
 
-    object Process : Abstract(R.string.squeeze) {
-
-    }
-
-    object Made : Abstract(R.string.made) {
-
-    }
-
-    object Finish :  Abstract(R.string.finish) {
-
-    }
+    object Finish : Abstract(R.string.finish)
 
 }

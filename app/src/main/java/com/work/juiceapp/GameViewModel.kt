@@ -1,16 +1,13 @@
 package com.work.juiceapp
 
 class GameViewModel(
-
-    private val repository: Repository
-
+    private val repository: Repository // Repository.Base()
 ) : Actions {
     fun init(): UiState = UiState.Initial(
         title = TitleUiState.Initial,
         image = ImageUiState.Initial,
         button = ButtonUiState.Initial,
     )
-
 
     override fun goToSqueeze(): UiState = UiState.Squeeze(
         title = TitleUiState.Squeeze,
@@ -30,19 +27,17 @@ class GameViewModel(
             UiState.Squeeze(
                 title = TitleUiState.Squeeze,
                 image = ImageUiState.Squeeze,
-                button = ButtonUiState.Squeeze,
-
-                )
+                button = ButtonUiState.Squeeze
+            )
         }
     }
 
 
-    override fun goToMade(): UiState =
-        UiState.Made(
-            title = TitleUiState.Made,
-            image = ImageUiState.Made,
-            button = ButtonUiState.Made,
-        )
+    override fun goToMade(): UiState = UiState.Made(
+        title = TitleUiState.Made,
+        image = ImageUiState.Made,
+        button = ButtonUiState.Made,
+    )
 
 
     override fun goToFinish(): UiState = UiState.Finish(

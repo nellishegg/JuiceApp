@@ -34,9 +34,8 @@ class GameViewModelTest {
         expected = UiState.Squeeze(
             title = TitleUiState.Squeeze,
             image = ImageUiState.Squeeze,
-            button = ButtonUiState.Squeeze,
-
-            )
+            button = ButtonUiState.Squeeze
+        )
         assertEquals(expected, actual)
 
 
@@ -86,15 +85,12 @@ class GameViewModelTest {
 private class FakeRepository() : Repository {
 
     private var currentTimesClicked = 0
-
     override fun increment() {
         currentTimesClicked++
     }
-
     override fun isMax(): Boolean {
         return currentTimesClicked == 5
     }
-
     override fun reset() {
         currentTimesClicked = 0
     }

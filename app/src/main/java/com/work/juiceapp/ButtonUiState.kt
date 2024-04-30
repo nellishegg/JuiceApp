@@ -2,9 +2,13 @@ package com.work.juiceapp
 
 import android.widget.Button
 import androidx.annotation.StringRes
+import java.io.Serializable
+import java.lang.IllegalStateException
 
-interface ButtonUiState {
+interface ButtonUiState : Serializable {
     fun update(mainButton: Button)
+    fun handleAction(gameViewModel: Actions): UiState
+
 
     abstract class Abstract(
         @StringRes private val resId: Int = R.string.next,
@@ -17,23 +21,32 @@ interface ButtonUiState {
     }
 
     object Initial : Abstract() {
-
+        override fun handleAction(gameViewModel: Actions): UiState {
+            return gameViewModel.goToSqueeze()
+        }
     }
 
     object Squeeze : Abstract(enabled = false) {
-
+        override fun handleAction(gameViewModel: Actions): UiState {
+            throw IllegalStateException()
+        }
     }
 
-    object Process :Abstract()  {
-
+    object Process : Abstract() {
+        override fun handleAction(gameViewModel: Actions): UiState {
+            return gameViewModel.goToMade()
+        }
     }
 
     object Made : Abstract() {
-
+        override fun handleAction(gameViewModel: Actions): UiState {
+            return gameViewModel.goToFinish()
+        }
     }
 
-    object Finish : Abstract(resId = R.string.restart)  {
-
+    object Finish : Abstract(resId = R.string.restart) {
+        override fun handleAction(gameViewModel: Actions): UiState {
+            return gameViewModel.startAgain()
+        }
     }
-
 }

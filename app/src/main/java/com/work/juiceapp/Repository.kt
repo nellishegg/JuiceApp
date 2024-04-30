@@ -1,11 +1,10 @@
 package com.work.juiceapp
 
 interface Repository {
-
     fun increment()
     fun isMax(): Boolean
     fun reset()
-    class Base():Repository{
+    class Base : Repository {
 
         private var currentTimesClicked = 0
 

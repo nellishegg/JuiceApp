@@ -21,13 +21,16 @@ class ScenarioTest {
         val appPage = AppPage()
 
         appPage.checkInitialState() //1
+        activityScenarioRule.scenario.recreate()
+        appPage.checkInitialState() //1
 
         appPage.clickNextButton()
 
         repeat(5) {
             appPage.checkSqueezeState()//2
-            appPage.clickImage()
             activityScenarioRule.scenario.recreate()
+            appPage.checkSqueezeState()//2
+            appPage.clickImage()
         }
 
         appPage.checkProcessState()//2.1
@@ -47,6 +50,10 @@ class ScenarioTest {
 
         appPage.clickRestartButton()
         appPage.checkInitialState()//1
+        activityScenarioRule.scenario.recreate()
+        appPage.checkInitialState()//1
+
+
 
     }
 }
