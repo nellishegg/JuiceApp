@@ -1,12 +1,11 @@
 package com.work.juiceapp
 
-import android.widget.Button
 import androidx.annotation.StringRes
 import java.io.Serializable
-import java.lang.IllegalStateException
 
 interface ButtonUiState : Serializable {
-    fun update(mainButton: Button)
+
+    fun update(mainButton: UpdateCustomActionButton)
     fun handleAction(gameViewModel: Actions): UiState
 
 
@@ -14,9 +13,8 @@ interface ButtonUiState : Serializable {
         @StringRes private val resId: Int = R.string.next,
         private val enabled: Boolean = true
     ) : ButtonUiState {
-        override fun update(mainButton: Button) {
-            mainButton.setText(resId)
-            mainButton.isEnabled = enabled
+        override fun update(mainButton: UpdateCustomActionButton) {
+            mainButton.updateUi(resId, enabled)
         }
     }
 

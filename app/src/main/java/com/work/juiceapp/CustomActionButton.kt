@@ -3,9 +3,10 @@ package com.work.juiceapp
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatButton
 
-class ActionButton : AppCompatButton {
+class CustomActionButton : AppCompatButton, UpdateCustomActionButton {
 
 
     private lateinit var uiState: ButtonUiState
@@ -18,9 +19,17 @@ class ActionButton : AppCompatButton {
         defStyleAttrs
     )
 
-    fun updateUiState(outer: ButtonUiState) {
+    override fun updateUiState(outer: ButtonUiState) {
         uiState = outer
         uiState.update(this)
+    }
+
+    override fun updateUi(resId: Int, enabled: Boolean) {
+        setText(resId)
+        this.isEnabled = enabled
+        this.setBackgroundColor(
+            if (enabled) resources.getColor(R.color.yellow) else resources.getColor(R.color.gray)
+        )
     }
 
     override fun onSaveInstanceState(): Parcelable? {
@@ -39,6 +48,11 @@ class ActionButton : AppCompatButton {
 
     fun handleAction(gameViewModel: Actions): UiState {
         return uiState.handleAction(gameViewModel)
-
     }
+}
+
+interface UpdateCustomActionButton {
+
+    fun updateUiState(outer: ButtonUiState)
+    fun updateUi(@StringRes resId: Int, enabled: Boolean)
 }

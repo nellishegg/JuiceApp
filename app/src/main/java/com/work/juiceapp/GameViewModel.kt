@@ -3,11 +3,17 @@ package com.work.juiceapp
 class GameViewModel(
     private val repository: Repository // Repository.Base()
 ) : Actions {
-    fun init(): UiState = UiState.Initial(
-        title = TitleUiState.Initial,
-        image = ImageUiState.Initial,
-        button = ButtonUiState.Initial,
-    )
+
+    fun init(isFirstTime: Boolean = true): UiState {
+        repository.reset()
+        return if (isFirstTime) {
+            UiState.Initial(
+                title = TitleUiState.Initial,
+                image = ImageUiState.Initial,
+                button = ButtonUiState.Initial,
+            )
+        } else UiState.Empty
+    }
 
     override fun goToSqueeze(): UiState = UiState.Squeeze(
         title = TitleUiState.Squeeze,

@@ -4,15 +4,16 @@ import androidx.annotation.DrawableRes
 import java.io.Serializable
 
 interface ImageUiState : Serializable {
-    fun update(imageButton: CustomImageButton)
+
+    fun update(imageButton:UpdateCustomImageButton)
 
     abstract class Abstract(
         @DrawableRes private val resId: Int,
         private val isClickable: Boolean = false
     ) : ImageUiState {
-        override fun update(imageButton: com.work.juiceapp.CustomImageButton) {
-            imageButton.setImageResource(resId)
-            imageButton.isClickable = isClickable
+        override fun update(imageButton: UpdateCustomImageButton) {
+            imageButton.updateUi(resId,isClickable)
+
         }
     }
 

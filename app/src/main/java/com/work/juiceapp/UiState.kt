@@ -1,23 +1,36 @@
 package com.work.juiceapp
 
-import com.work.juiceapp.databinding.ActivityMainBinding
 import java.io.Serializable
-import java.lang.IllegalStateException
 
 interface UiState : Serializable {
 
-    fun update(binding: ActivityMainBinding)
+    fun update(
+        titleCustom: UpdateCustomTextView,
+        actionButton: UpdateCustomActionButton,
+        imageButton: UpdateCustomImageButton,
+    )
 
-    // Abstract class - общий код для всех классов, которые реализуют интерфейс
+    object Empty : UiState {
+        override fun update(
+            titleCustom: UpdateCustomTextView,
+            actionButton: UpdateCustomActionButton,
+            imageButton: UpdateCustomImageButton,
+        ) = Unit
+    }
+
     abstract class Abstract(
         private val title: TitleUiState,
         private val image: ImageUiState,
         private val button: ButtonUiState
     ) : UiState {
-        override fun update(binding: ActivityMainBinding) = with(binding) {
-            title.update(titleTextView)
+        override fun update(
+            titleCustom: UpdateCustomTextView,
+            actionButton: UpdateCustomActionButton,
+            imageButton: UpdateCustomImageButton,
+        ) {
+            title.update(titleCustom)
             imageButton.updateUiState(image)
-            mainButton.updateUiState(button)
+            actionButton.updateUiState(button)
         }
     }
 

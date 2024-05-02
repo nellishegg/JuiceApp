@@ -3,11 +3,14 @@ package com.work.juiceapp
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.widget.ImageButton
+import android.view.View
+import android.widget.ImageView
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.core.view.isGone
 
-import androidx.appcompat.widget.AppCompatButton
-
-class CustomImageButton : androidx.appcompat.widget.AppCompatImageButton {
+class CustomImageButton : androidx.appcompat.widget.AppCompatImageButton, UpdateCustomImageButton {
 
     private lateinit var uiState: ImageUiState
 
@@ -19,9 +22,14 @@ class CustomImageButton : androidx.appcompat.widget.AppCompatImageButton {
         defStyleAttrs
     )
 
-    fun updateUiState(outer: ImageUiState) {
+    override fun updateUiState(outer: ImageUiState) {
         uiState = outer
         uiState.update(this)
+    }
+
+    override fun updateUi(resId: Int, clickable: Boolean) {
+        this.setImageResource(resId)
+        this.isClickable = clickable
     }
 
     override fun onSaveInstanceState(): Parcelable? {
@@ -37,5 +45,10 @@ class CustomImageButton : androidx.appcompat.widget.AppCompatImageButton {
         super.onRestoreInstanceState(restoredState.superState)
         updateUiState(restoredState.restore())
     }
+}
+
+interface UpdateCustomImageButton {
+    fun updateUiState(outer: ImageUiState)
+    fun updateUi(@DrawableRes resId: Int, clickable: Boolean)
 }
 

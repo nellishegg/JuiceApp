@@ -1,14 +1,13 @@
 package com.work.juiceapp
 
-import android.widget.TextView
 import androidx.annotation.StringRes
 
 interface TitleUiState {
-    fun update(titleTextView: TextView)
+    fun update(titleTextView: UpdateCustomTextView)
 
     abstract class Abstract(@StringRes private val resId: Int) : TitleUiState {
-        override fun update(titleTextView: TextView) {
-            titleTextView.setText(resId)
+        override fun update(titleTextView: UpdateCustomTextView) {
+            titleTextView.update(resId)
         }
     }
 
@@ -23,3 +22,6 @@ interface TitleUiState {
     object Finish : Abstract(R.string.finish)
 
 }
+
+
+

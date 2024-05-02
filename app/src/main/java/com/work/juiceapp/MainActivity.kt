@@ -20,17 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainButton.setOnClickListener {
             uiState = binding.mainButton.handleAction(gameViewModel)
-            uiState.update(binding)
+            uiState.update(binding.titleTextView, binding.mainButton, binding.imageButton)
         }
 
         binding.imageButton.setOnClickListener {
             uiState = gameViewModel.handleImage()
-            uiState.update(binding)
+            uiState.update(binding.titleTextView, binding.mainButton, binding.imageButton)
         }
-        if (savedInstanceState == null) {
-            uiState = gameViewModel.init()
-            uiState.update(binding)
-        }
+
+        uiState = gameViewModel.init(savedInstanceState == null)
+        uiState.update(binding.titleTextView, binding.mainButton, binding.imageButton)
     }
 
 }

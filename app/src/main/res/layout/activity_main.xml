@@ -15,7 +15,7 @@
         android:scaleType="fitCenter"
         tools:src="@drawable/tree" />
 
-    <TextView
+    <com.work.juiceapp.CustomTitleView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:freezesText="true"
         tools:text="Tap the button to select a lemon" />
 
-    <com.work.juiceapp.ActionButton
+    <com.work.juiceapp.CustomActionButton
         android:id="@+id/mainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
